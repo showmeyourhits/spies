@@ -1,6 +1,16 @@
+const path = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const htmlParams = {
+	title: 'Gaems',
+	inject: true,
+	template: path.resolve('src/client/template.html'),
+}
+
+
 module.exports = {
 	entry: {
-		index: './src/index.js'
+		client: './src/client/index.js'
 	},
 	output: {
 		path: 'build',
@@ -17,7 +27,20 @@ module.exports = {
 						presets: ['es2015', 'react', 'stage-1'],
 					},
 				}
+			},
+			{
+				test: /\.png$/,
+				exclude: [/node_modules/],
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+					}
+				}
 			}
 		]
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin(htmlParams),
+	]
 }
