@@ -10,7 +10,12 @@ const htmlParams = {
 
 module.exports = {
 	entry: {
-		client: './src/client/index.js'
+		client: path.resolve('src/client/js', 'index.js'),
+	},
+	resolve: {
+		alias: {
+			client: path.resolve('src/client'),
+		}
 	},
 	output: {
 		path: 'build',
